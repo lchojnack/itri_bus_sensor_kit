@@ -61,33 +61,33 @@ def launch_setup(context, *args, **kwargs):
 
     # turn packets into pointcloud as in
     # https://github.com/ros-drivers/velodyne/blob/ros2/velodyne_pointcloud/launch/velodyne_convert_node-VLP16-composed-launch.py
-    nodes.append(
-        ComposableNode(
-            package="velodyne_pointcloud",
-            plugin="velodyne_pointcloud::Convert",
-            name="velodyne_convert_node",
-            parameters=[
-                {
-                    **create_parameter_dict(
-                        "calibration",
-                        "min_range",
-                        "max_range",
-                        "num_points_thresholds",
-                        "invalid_intensity",
-                        "frame_id",
-                        "scan_phase",
-                        "view_direction",
-                        "view_width",
-                    ),
-                }
-            ],
-            remappings=[
-                ("velodyne_points", "pointcloud_raw"),
-                ("velodyne_points_ex", "pointcloud_raw_ex"),
-            ],
-            extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
-        )
-    )
+    # nodes.append(
+    #     ComposableNode(
+    #         package="velodyne_pointcloud",
+    #         plugin="velodyne_pointcloud::Convert",
+    #         name="velodyne_convert_node",
+    #         parameters=[
+    #             {
+    #                 **create_parameter_dict(
+    #                     "calibration",
+    #                     "min_range",
+    #                     "max_range",
+    #                     "num_points_thresholds",
+    #                     "invalid_intensity",
+    #                     "frame_id",
+    #                     "scan_phase",
+    #                     "view_direction",
+    #                     "view_width",
+    #                 ),
+    #             }
+    #         ],
+    #         remappings=[
+    #             ("velodyne_points", "pointcloud_raw"),
+    #             ("velodyne_points_ex", "pointcloud_raw_ex"),
+    #         ],
+    #         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
+    #     )
+    # )
 
     cropbox_parameters = create_parameter_dict("input_frame", "output_frame")
     cropbox_parameters["negative"] = True
